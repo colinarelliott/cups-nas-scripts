@@ -1,3 +1,4 @@
+#defines some colours for use in print output
 class textColour:
     BLUE = '\033[94m'
     CYAN = '\033[96m'
@@ -7,8 +8,6 @@ class textColour:
     ORANGE = '\033[33m'
     PINK = '\033[95m'
     PURPLE = '\033[35m'
-    WHITE = '\033[37m'
-    GREY = '\033[90m'
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
