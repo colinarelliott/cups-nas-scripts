@@ -1,6 +1,7 @@
 #imports files, sends them to output, then moves them to destination
 import os, subprocess, sys 
 from fileManager import FileManager as fileManager
+from colouredPrint import textColour as tc
 
 #TESTING PATHS
 inputPath = "input"
@@ -14,39 +15,34 @@ destination = "destination"
 
 # find all the files in the inputPath
 inputFiles = os.listdir(inputPath)
-print("Files in inputPath: ", inputFiles)
+print(f"{tc.YELLOW}Files in inputPath: {tc.ENDC}{tc.CYAN}{inputFiles}{tc.ENDC}")
 
 # if no files to process, exit
 if (len(inputFiles) == 0):
-    print("No files to process, exiting")
+    print(f"{tc.BOLD} {tc.RED}No files to process, exiting.{tc.ENDC}")
     sys.exit(0)
 
 # loop through all the files and use filemanager class to process each into an mp4 then send to output
 for file in inputFiles:
-    print(f'Processing file: {file}')
+    print(f'{tc.BLUE}Processing file: {tc.CYAN}[{file}]{tc.ENDC}')
     input_file = f'{inputPath}/{file}'
     output_file = f'{outputPath}/{file}'
     file_manager = fileManager(input_file, output_file)
-    print("FileManager created for file: " + file)
+    print(f"{tc.PURPLE}FileManager created for file: {tc.CYAN}[{file}]{tc.ENDC}")
     file_manager.check_input_file()
-    print("Checked input file")
+    print(f"{tc.GREEN}Input file exists. {tc.ENDC}")
     file_manager.check_output_file()
-    print("Checked output file")
+    print(f"{tc.GREEN}Output file does not already exist.{tc.ENDC}")
     file_manager.run_ffmpeg()
-    print("FFMPEG conversion complete!")
+    print(f"{tc.PINK}FFMPEG conversion complete!{tc.ENDC}")
     # move the file to the destination
     subprocess.run(f'mv {output_file} {destination}/{file}', shell=True)
-    print("File moved to destination")
-
-# check for the files in the output path, remove matching files in the input path (CLEANUP)
-outputFiles = os.listdir(outputPath)
-for file in outputFiles:
-    if file in inputFiles:
-        os.remove(f'{inputPath}/{file}')
+    print(f"{tc.GREEN}File moved to destination.{tc.ENDC}")
 
 # check for the files in the destination path, remove matching files in the input (CLEANUP)
 inputFiles = os.listdir(inputPath)
 destinationFiles = os.listdir(destination)
 for file in destinationFiles:
     if file in inputFiles:
+        print(f"{tc.ORANGE}CLEANUP: Removing file {file} from inputPath {tc.ENDC}")
         os.remove(f'{inputPath}/{file}')
