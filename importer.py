@@ -2,19 +2,17 @@
 import os, subprocess, sys
 from fileManager import FileManager as fileManager
 from colouredPrint import textColour as tc
+import configparser
 
 # check for the argument passed to the script
 outputType = sys.argv[1]
 
-# set the input, output, and destination paths based on the argument
-inputPath = 'input'
-outputPath = 'output'
-destination = 'destination'
-
-# PRODUCTION
-#inputPath = "/mnt/z/INPUT"
-#outputPath = "/mnt/z/OUTPUT"
-#destination = "/mnt/y/_RECORDINGS/TEMP"
+# read the input, output, and destination paths from the file
+config = configparser.RawConfigParser()
+config.read_file(open(r'importer.cfg'))
+inputPath = config.get('Importer', 'inputPath')
+outputPath = config.get('Importer', 'outputPath')
+destination = config.get('Importer', 'destination')
 
 # loop through all the files and use filemanager class to process each into an mp4 then send to output
 def processfiles_cmd():
