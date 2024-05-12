@@ -30,9 +30,14 @@ validFiles = []
 for file in filesToCheck:
     # check if the file needs to be converted somehow, and if true
     validFiles.append(file)
+    print("Valid file found: ", file)
 
 # move valid files to inputPath
 for file in validFiles:
     moveFile = f'mv {file} {inputPath}'
     os.system(moveFile)
+    print("File moved to inputPath: ", file)
 
+# check if any valid files were found
+if len(validFiles) == 0:
+    print("No valid files found.")
