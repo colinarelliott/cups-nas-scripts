@@ -9,5 +9,15 @@
     <!--show processes-->
     <h3>Select an operation:</h3>
     <a href="/import"><button>Import</button></a>
+    <a href="/input"><button>Input Files</button></a>
+    <a href="/output"><button>Output Files</button></a>
+    <a href="/destination"><button>Destination Files</button></a>
+
+    <h4>Files:</h4>
+    <ul>
+    {% for file in files %}
+        <li>{{ file }}</li>
+    {% endfor %}
+    </ul>
 </body>
 </html>
