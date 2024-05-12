@@ -29,8 +29,10 @@ validFiles = []
 # Move files to inputPath
 for file in filesToCheck:
     # check if the file needs to be converted somehow, and if true
-    validFiles.append(file)
-    print("Valid file found: ", file)
+    if (file.endswith('.mp4') or file.endswith('.mov') or file.endswith('.avi')):
+        print(f"Valid file found: {file}<br>")
+        validFiles.append(file)
+        continue
 
 # move valid files to inputPath
 for file in validFiles:
