@@ -48,5 +48,11 @@ def dest():
         destinationFiles = ["No files in destination directory"]
     return render_template('index.html', files=destinationFiles)
 
+@app.route('/sort')
+def sort():
+    command = "python3 sorter.py"
+    out = os.popen(command).read()
+    return (out)
+
 if __name__ == '__main__':
     app.run()
