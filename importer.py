@@ -4,8 +4,8 @@ import os, configparser
 # read the input, output, and destination paths from the file
 config = configparser.RawConfigParser()
 config.read_file(open(r'filepaths.cfg'))
-inputPath = config.get('Importer', 'inputPath')
-scanPath = config.get('Importer', 'scanPath')
+inputPath = config.get('Filepaths', 'inputPath')
+scanPath = config.get('Filepaths', 'scanPath')
 
 # list to store files to move
 filesToCheck = []
