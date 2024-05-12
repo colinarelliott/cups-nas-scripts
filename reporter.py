@@ -17,7 +17,7 @@ def index():
 
 @app.route('/import')
 def imp():
-    command = "python3 importer.py web"
+    command = "python3 converter.py web"
     out = os.popen(command).read()
     return (out)
 
