@@ -1,11 +1,14 @@
-from flask import Flask, render_template
-import os
-
-inputPath = "input"
-outputPath = "output"
-destination = "destination"
-
 # Python Flask application that serves the web page and handles the API requests
+from flask import Flask, render_template
+import os, configparser
+
+# read the input, output, and destination paths from the file
+config = configparser.RawConfigParser()
+config.read_file(open(r'filepaths.cfg'))
+inputPath = config.get('Importer', 'inputPath')
+outputPath = config.get('Importer', 'outputPath')
+destination = config.get('Importer', 'destination')
+
 app = Flask(__name__)
 
 @app.route('/')
