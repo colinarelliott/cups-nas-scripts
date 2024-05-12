@@ -1,4 +1,4 @@
-# Simple Automatic Importer & FFMPEG Converter Script for CUPS NAS
+# Scripts for automating the CUPS NAS
 - **CONVERTER**: a script to import files from an input directory, convert them to a specified mp4 format and then copy them to a destination directory (intended to be on remote NAS)
 - **IMPORTER**: a script to import files from a specified scan folder
 - **SORTER**: (WIP) a script to sort files on the destination folder once on the NAS by date
