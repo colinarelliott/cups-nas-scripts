@@ -3,4 +3,6 @@
 
 ## Requirements
 - FFMPEG installed on system: https://ffmpeg.org/download.html
-- Python 3.9.6
+- Python 3.12
+  - Flask 3.0.3
+  - dateutils 0.6.12
