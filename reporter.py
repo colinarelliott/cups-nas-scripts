@@ -15,9 +15,15 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/process')
+def process():
+    command = "python3 converter.py web"
+    out = os.popen(command).read()
+    return (out)
+
 @app.route('/import')
 def imp():
-    command = "python3 converter.py web"
+    command = "python3 importer.py"
     out = os.popen(command).read()
     return (out)
 
