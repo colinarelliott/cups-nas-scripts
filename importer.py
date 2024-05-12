@@ -1,7 +1,7 @@
 #imports files, sends them to output, then moves them to destination
 import os, subprocess, sys
-from fileManager import FileManager as fileManager
-from colouredPrint import textColour as tc
+from src.fileManager import FileManager as fileManager
+from src.colouredPrint import textColour as tc
 import configparser
 
 # check for the argument passed to the script
@@ -9,7 +9,7 @@ outputType = sys.argv[1]
 
 # read the input, output, and destination paths from the file
 config = configparser.RawConfigParser()
-config.read_file(open(r'importer.cfg'))
+config.read_file(open(r'filepaths.cfg'))
 inputPath = config.get('Importer', 'inputPath')
 outputPath = config.get('Importer', 'outputPath')
 destination = config.get('Importer', 'destination')
