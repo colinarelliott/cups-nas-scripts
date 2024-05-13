@@ -10,17 +10,17 @@ scanPath = config.get('Filepaths', 'scanPath')
 # list to store files to move
 filesToCheck = []
  
-# Iterate over files in directory
+# Iterate over files in directorys
 for path, folders, files in os.walk(scanPath):
     # loose files
     for filename in files:
-        filesToCheck.append(scanPath+'/"'+filename+"/")
+        filesToCheck.append(scanPath+'/"'+filename+'"')
  
     # files in folders
     for folder_name in folders:
         files = os.listdir(f"{path}/{folder_name}")
         for filename in files:
-            filesToCheck.append(scanPath+"/"+folder_name+"/"+filename)
+            filesToCheck.append(scanPath+"/"+folder_name+'/"'+filename+'"')
     break
 
 # list to store valid files
