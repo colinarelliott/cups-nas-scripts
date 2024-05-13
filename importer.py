@@ -36,7 +36,7 @@ for file in filesToCheck:
 
 # move valid files to inputPath
 for file in validFiles:
-    moveFile = f'mv {file} {inputPath}'
+    moveFile = f'mv "{file}" "{inputPath}"'
     os.system(moveFile)
     print("File moved to inputPath: ", file)
 
