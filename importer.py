@@ -14,7 +14,7 @@ filesToCheck = []
 for path, folders, files in os.walk(scanPath):
     # loose files
     for filename in files:
-        filesToCheck.append(scanPath+"/"+filename)
+        filesToCheck.append(scanPath+'/"'+filename+"/")
  
     # files in folders
     for folder_name in folders:
