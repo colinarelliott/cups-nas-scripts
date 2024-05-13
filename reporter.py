@@ -29,7 +29,8 @@ def imp():
 
 @app.route('/input')
 def input():
-    inputFiles = os.listdir(inputPath)
+    # if the input file is a directory, process accordingly
+    inputFiles = [f for f in os.listdir(inputPath) if os.path.isfile(os.path.join(inputPath, f))]
     if (len(inputFiles) == 0):
         inputFiles = ["No files to process"]
     return render_template('index.html', files=inputFiles)
@@ -53,6 +54,17 @@ def sort():
     command = "python3 sorter.py"
     out = os.popen(command).read()
     return (out)
+
+@app.route('/delete_input')
+def delete_input():
+    command = f"rm -rf {inputPath}/*"
+    return "Input files deleted."
+
+@app.route('/delete_output')
+def delete_output():
+    command = f"rm -rf {outputPath}/*"
+    out = os.popen(command).read()
+    return "Output files deleted."
 
 if __name__ == '__main__':
     app.run()
