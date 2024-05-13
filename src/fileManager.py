@@ -19,7 +19,7 @@ class FileManager:
             sys.exit(1)
 
     def run_ffmpeg(self):
-        ffmpeg_cmd = f'ffmpeg -y -i {self.input_file} -loglevel repeat+info -hide_banner -c:v libx264 -crf 23 -c:a aac -b:a 128k {self.output_file}'
+        ffmpeg_cmd = f'ffmpeg -y -i "{self.input_file}" -loglevel repeat+info -hide_banner -c:v libx264 -crf 23 -c:a aac -b:a 128k "{self.output_file}"'
         subprocess.run(ffmpeg_cmd, shell=True)
 
 
