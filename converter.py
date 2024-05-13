@@ -82,7 +82,7 @@ def processfiles_web():
         file_manager.run_ffmpeg()
         print(f"<b>FFMPEG:</b> conversion complete!<br>")
         # move the file to the destination
-        subprocess.run(f'mv {output_file} {destination}/{file}', shell=True)
+        subprocess.run(f'mv "{output_file}" "{destination}/{file}"', shell=True)
         print(f"File moved to destination: <kbd>{destination}/{file}</kbd><br>")
 
         # check for the files in the destination path, remove matching files in the input (CLEANUP)
