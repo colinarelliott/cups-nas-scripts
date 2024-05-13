@@ -10,9 +10,9 @@ outputType = sys.argv[1]
 # read the input, output, and destination paths from the file
 config = configparser.RawConfigParser()
 config.read_file(open(r'filepaths.cfg'))
-inputPath = config.get('Importer', 'inputPath')
-outputPath = config.get('Importer', 'outputPath')
-destination = config.get('Importer', 'destination')
+inputPath = config.get('Filepaths', 'inputPath')
+outputPath = config.get('Filepaths', 'outputPath')
+destination = config.get('Filepaths', 'destination')
 
 # loop through all the files and use filemanager class to process each into an mp4 then send to output
 def processfiles_cmd():
