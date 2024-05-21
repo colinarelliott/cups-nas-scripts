@@ -30,21 +30,45 @@ def imp():
 @app.route('/input')
 def input():
     # if the input file is a directory, process accordingly
-    inputFiles = [f for f in os.listdir(inputPath) if os.path.isfile(os.path.join(inputPath, f))]
+    inputFiles = [ ]
+    for path, folders, files in os.walk(inputPath):
+        for filename in files:
+            inputFiles.append(filename)
+        for folder_name in folders:
+            files = os.listdir(f"{path}/{folder_name}")
+            for filename in files:
+                inputFiles.append('/'+folder_name+'/'+filename)
+        break
     if (len(inputFiles) == 0):
         inputFiles = ["No files to process"]
     return render_template('index.html', files=inputFiles)
 
 @app.route('/output')
 def output():
-    outputFiles = os.listdir(outputPath)
+    outputFiles = []
+    for path, folders, files in os.walk(outputPath):
+        for filename in files:
+            outputFiles.append(filename)
+        for folder_name in folders:
+            files = os.listdir(f"{path}/{folder_name}")
+            for filename in files:
+                outputFiles.append('/'+folder_name+'/'+filename)
+        break
     if (len(outputFiles) == 0):
         outputFiles = ["No files in output directory"]
     return render_template('index.html', files=outputFiles)
 
 @app.route('/destination')
 def dest():
-    destinationFiles = os.listdir(destination)
+    destinationFiles = []
+    for path, folders, files in os.walk(destination):
+        for filename in files:
+            destinationFiles.append(filename)
+        for folder_name in folders:
+            files = os.listdir(f"{path}/{folder_name}")
+            for filename in files:
+                destinationFiles.append('/'+folder_name+'/'+filename)
+        break
     if (len(destinationFiles) == 0):
         destinationFiles = ["No files in destination directory"]
     return render_template('index.html', files=destinationFiles)
