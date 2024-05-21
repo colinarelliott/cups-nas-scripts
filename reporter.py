@@ -87,15 +87,16 @@ def sort():
 
 @app.route('/delete_input')
 def delete_input():
-    command = []
-    command.append( f"rm -rf {inputPath}/*")
-    return render_template('output.html', files=command)
+    command = f"rm -rf {outputPath}/*"
+    out = []
+    out.append("Success. Files in /input have been deleted.")
+    return render_template('output.html', files=out)
 
 @app.route('/delete_output')
 def delete_output():
     command = f"rm -rf {outputPath}/*"
     out = []
-    out.append(os.popen(command).read())
+    out.append("Success. Files in /output have been deleted.")
     return render_template('output.html', files=out)
 
 if __name__ == '__main__':
