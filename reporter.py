@@ -9,7 +9,10 @@ inputPath = config.get('Filepaths', 'inputPath')
 outputPath = config.get('Filepaths', 'outputPath')
 destination = config.get('Filepaths', 'destination')
 
+#flaskapp
 app = Flask(__name__)
+
+## ROUTES
 
 @app.route('/')
 def index():
@@ -99,5 +102,6 @@ def delete_output():
     out.append("Success. Files in /output have been deleted.")
     return render_template('output.html', files=out)
 
+# run the app
 if __name__ == '__main__':
     app.run()
