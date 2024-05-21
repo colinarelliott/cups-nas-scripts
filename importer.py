@@ -14,13 +14,16 @@ filesToCheck = []
 for path, folders, files in os.walk(scanPath):
     # loose files
     for filename in files:
-        filesToCheck.append(scanPath+'/"'+filename+'"')
+        print(f"File found: {filename}<br>")
+        filesToCheck.append(scanPath+'/'+filename)
  
     # files in folders
     for folder_name in folders:
+        print(f"Folder found: {folder_name}<br>")
         files = os.listdir(f"{path}/{folder_name}")
         for filename in files:
-            filesToCheck.append(scanPath+"/"+folder_name+'/"'+filename+'"')
+            print(f"File in folder {folder_name} found: {filename}<br>")
+            filesToCheck.append(scanPath+"/"+folder_name+'/'+filename)
     break
 
 # list to store valid files
@@ -33,13 +36,15 @@ for file in filesToCheck:
         print(f"Valid file found: {file}<br>")
         validFiles.append(file)
         continue
+    else:
+        print(f"Invalid file found: {file}<br>")
 
 # move valid files to inputPath
 for file in validFiles:
     moveFile = f'mv "{file}" "{inputPath}"'
     os.system(moveFile)
-    print("File moved to inputPath: ", file)
+    print("File moved to inputPath: ", file + "<br>")
 
 # check if any valid files were found
 if len(validFiles) == 0:
-    print("No valid files found.")
+    print("No valid files found. Exiting.<br>")
