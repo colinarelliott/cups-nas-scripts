@@ -57,40 +57,40 @@ def processfiles_cmd():
 def processfiles_web():
     # find all the files in the inputPath
     inputFiles = os.listdir(inputPath)
-    print(f"Files in inputPath: <kbd>{inputFiles}</kbd><br>")
+    print(f"Files in inputPath: {inputFiles}")
 
     # if no files to process, exit
     if (len(inputFiles) == 0):
-        print(f"No files to process, exiting.<br>")
+        print(f"No files to process, exiting.")
         sys.exit(0)
 
     for file in inputFiles:
-        print(f'<b>WEB:</b> Processing file: <kbd>[{file}]</kbd><br>')
+        print(f'WEB: Processing file: [{file}]')
         # set the input and output file paths
         input_file = f'{inputPath}/{file}'
         output_file = f'{outputPath}/{file}'
         # create a file manager object
         file_manager = fileManager(input_file, output_file)
-        print(f"FileManager created for file: <kbd>[{file}]</kbd><br>")
+        print(f"FileManager created for file: [{file}]")
         # check to see if input file exists
         file_manager.check_input_file()
-        print(f"Input file exists.<br>")
+        print(f"Input file exists.")
         # check to see if output file exists
         file_manager.check_output_file()
-        print(f"Output file does not already exist.<br>")
+        print(f"Output file does not already exist.")
         # run ffmpeg to convert the file
         file_manager.run_ffmpeg()
-        print(f"<b>FFMPEG:</b> conversion complete!<br>")
+        print(f"FFMPEG: conversion complete!")
         # move the file to the destination
         subprocess.run(f'mv "{output_file}" "{destination}/{file}"', shell=True)
-        print(f"File moved to destination: <kbd>{destination}/{file}</kbd><br>")
+        print(f"File moved to destination: {destination}/{file}")
 
         # check for the files in the destination path, remove matching files in the input (CLEANUP)
         inputFiles = os.listdir(inputPath)
         destinationFiles = os.listdir(destination)
         for file in destinationFiles:
             if file in inputFiles:
-                print(f"<b>CLEANUP:</b> Removing file {file} from inputPath.")
+                print(f"CLEANUP: Removing file {file} from inputPath.")
                 os.remove(f'{inputPath}/{file}')
 
 # run one of two loops depending on the output type
