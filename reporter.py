@@ -18,14 +18,16 @@ def index():
 @app.route('/process')
 def process():
     command = "python3 converter.py web"
-    out = os.popen(command).read()
-    return (out)
+    out = []
+    out.append(os.popen(command).read())
+    return render_template('output.html', files=out)
 
 @app.route('/import')
 def imp():
     command = "python3 importer.py"
-    out = os.popen(command).read()
-    return (out)
+    out = []
+    out.append(os.popen(command).read())
+    return render_template('output.html', files=out)
 
 @app.route('/input')
 def input():
@@ -33,11 +35,12 @@ def input():
     inputFiles = [ ]
     for path, folders, files in os.walk(inputPath):
         for filename in files:
-            inputFiles.append(filename)
+            inputFiles.append("FILE: "+filename)
         for folder_name in folders:
+            inputFiles.append("DIR: "+folder_name + " ↓")
             files = os.listdir(f"{path}/{folder_name}")
             for filename in files:
-                inputFiles.append('/'+folder_name+'/'+filename)
+                inputFiles.append('   '+filename)
         break
     if (len(inputFiles) == 0):
         inputFiles = ["No files to process"]
@@ -48,11 +51,12 @@ def output():
     outputFiles = []
     for path, folders, files in os.walk(outputPath):
         for filename in files:
-            outputFiles.append(filename)
+            outputFiles.append("FILE: "+filename)
         for folder_name in folders:
+            outputFiles.append("DIR: "+folder_name + " ↓")
             files = os.listdir(f"{path}/{folder_name}")
             for filename in files:
-                outputFiles.append('/'+folder_name+'/'+filename)
+                outputFiles.append('   '+filename)
         break
     if (len(outputFiles) == 0):
         outputFiles = ["No files in output directory"]
@@ -63,11 +67,12 @@ def dest():
     destinationFiles = []
     for path, folders, files in os.walk(destination):
         for filename in files:
-            destinationFiles.append(filename)
+            destinationFiles.append("FILE: "+filename)
         for folder_name in folders:
+            destinationFiles.append("DIR: "+folder_name + " ↓")
             files = os.listdir(f"{path}/{folder_name}")
             for filename in files:
-                destinationFiles.append('/'+folder_name+'/'+filename)
+                destinationFiles.append('FILE: '+filename)
         break
     if (len(destinationFiles) == 0):
         destinationFiles = ["No files in destination directory"]
@@ -76,19 +81,22 @@ def dest():
 @app.route('/sort')
 def sort():
     command = "python3 sorter.py"
-    out = os.popen(command).read()
-    return (out)
+    out = []
+    out.append(os.popen(command).read())
+    return render_template('output.html', files=out)
 
 @app.route('/delete_input')
 def delete_input():
-    command = f"rm -rf {inputPath}/*"
-    return "Input files deleted."
+    command = []
+    command.append( f"rm -rf {inputPath}/*")
+    return render_template('output.html', files=command)
 
 @app.route('/delete_output')
 def delete_output():
     command = f"rm -rf {outputPath}/*"
-    out = os.popen(command).read()
-    return "Output files deleted."
+    out = []
+    out.append(os.popen(command).read())
+    return render_template('output.html', files=out)
 
 if __name__ == '__main__':
     app.run()
