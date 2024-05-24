@@ -83,7 +83,12 @@ def processfiles_web():
         print(f"FFMPEG: conversion complete!")
         # move the file to the destination
         subprocess.run(f'mv "{output_file}" "{destination}/{file}"', shell=True)
-        print(f"File moved to destination: {destination}/{file}")
+        if os.path.exists(f'{destination}/{file}'):
+            print(f"File moved to destination: {destination}/{file}")
+        else:
+            print(f"File not moved to destination: {destination}/{file}")
+            print(f"Error: File error encountered. Moving to safe error directory.")
+            subprocess.run(f'mv "{inputPath}/{file}" "{inputPath}/ERROR/{file}"', shell=True)
 
         # check for the files in the destination path, remove matching files in the input (CLEANUP)
         inputFiles = os.listdir(inputPath)
